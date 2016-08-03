@@ -22,9 +22,9 @@ public class AdminLoginRequiredInterceptor implements HandlerInterceptor{
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         //System.out.println(hostHolder.getUser().getType().equals("admin"));
         //System.out.println(hostHolder.getUser() == null);
-        if(hostHolder.getUser() != null){
-            System.out.println(hostHolder.getUser().getType());
-        }
+//        if(hostHolder.getUser() != null){
+//            System.out.println(hostHolder.getUser().getType());
+//        }
         if(hostHolder.getUser() == null || !hostHolder.getUser().getType().equals("admin")){
             httpServletResponse.sendRedirect("/admin/loginPage");
             return false;

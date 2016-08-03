@@ -2,6 +2,7 @@ package com.bg;
 
 import com.bg.dao.UserDAO;
 import com.bg.model.User;
+import com.bg.util.WatchMovieUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class InitDatabaseTests {
         User admin = new User();
         admin.setHeadUrl(String.format("http://images.nowcoder.com/head/%dt.png", random.nextInt(1000)));
         admin.setName("admin");
-        admin.setPassword("admin");
+        admin.setPassword(WatchMovieUtil.MD5("admin"));
         admin.setSalt("");
         admin.setType("admin");
         userDAO.addUser(admin);

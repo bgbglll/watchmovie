@@ -2,6 +2,11 @@ package com.bg.controller.admin;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.bg.async.EventModel;
+import com.bg.async.EventProducer;
+import com.bg.async.EventType;
+import com.bg.model.EntityType;
+import com.bg.model.HostHolder;
 import com.bg.model.fileclient.RequestFile;
 import com.bg.model.fileclient.ResponseFile;
 import com.bg.service.fileclient.FileTransferClient;
@@ -36,6 +41,11 @@ public class DispatchController {
     @Autowired
     JedisAdapter jedisAdapter;
 
+    @Autowired
+    EventProducer eventProducer;
+
+    @Autowired
+    HostHolder hostHolder;
     @RequestMapping(path = {"/transferFile/"}, method = {RequestMethod.POST})
     @ResponseBody
     public String transferFile(@RequestParam("qqfile") List<MultipartFile> fileTmp
@@ -119,6 +129,13 @@ public class DispatchController {
             json.put("progress", "100");
             json.put("id","0");
             json.put("server","0");
+            eventProducer.fireEvent(new EventModel(EventType.DISPATCH)
+                    .setEntityOwnerId(hostHolder.getUser().getId())
+                    // system id;
+                    .setActorId(1)
+                    .setEntityId(0)
+                    .setEntityType(EntityType.ENTITY_DISPATCH));
+
             return json.toJSONString();
         }
         //System.out.println(response);
@@ -141,4 +158,5 @@ public class DispatchController {
 
         return json.toJSONString();
     }
+
 }

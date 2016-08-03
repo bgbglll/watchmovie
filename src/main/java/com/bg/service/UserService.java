@@ -3,6 +3,7 @@ package com.bg.service;
 
 import com.bg.dao.LoginTicketDAO;
 import com.bg.dao.UserDAO;
+import com.bg.model.HostHolder;
 import com.bg.model.LoginTicket;
 import com.bg.model.User;
 import com.bg.util.WatchMovieUtil;
@@ -20,6 +21,9 @@ public class UserService {
 
     @Autowired
     UserDAO userDAO;
+
+    @Autowired
+    HostHolder hostHolder;
 
     @Autowired
     LoginTicketDAO loginTicketDAO;
@@ -110,6 +114,7 @@ public class UserService {
         Date date = new Date();
         date.setTime(date.getTime() +  1000*3600*24);
         ticket.setExpired(date);
+        ticket.setLogin(date);
         ticket.setStatus(0);
         ticket.setTicket(UUID.randomUUID().toString().replaceAll("-",""));
         loginTicketDAO.addTicket(ticket);
@@ -119,5 +124,9 @@ public class UserService {
 
     public void logout(String ticket){
         loginTicketDAO.updateStatus(ticket,1);
+    }
+
+    public Date getLoginTime() {
+        return loginTicketDAO.selectByUserId(hostHolder.getUser().getId()).get(0).getLogin();
     }
 }

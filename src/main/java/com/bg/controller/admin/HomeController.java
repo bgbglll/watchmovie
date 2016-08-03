@@ -1,8 +1,20 @@
 package com.bg.controller.admin;
 
+import com.bg.controller.MessageController;
+import com.bg.model.*;
+import com.bg.service.MessageService;
+import com.bg.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/8/1.
@@ -11,8 +23,42 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller("adminHomeController")
 public class HomeController {
 
+    @Autowired
+    MessageService messageService;
+
+    @Autowired
+    HostHolder hostHolder;
+
+    @Autowired
+    UserService userService;
+
+    private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
     @RequestMapping(path = {"/admin/", "/admin/index"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String index() {
+    public String index(Model model) {
+        try {
+            int userId = hostHolder.getUser().getId();
+            List<ViewObject> conversations = new ArrayList<>();
+            List<Message> conversationList = messageService.getConversationList(userId, 0, 10);
+            Date date = new Date();
+            //System.out.println(date);
+            for (Message msg : conversationList) {
+                //System.out.println(msg.getContent());
+                ViewObject vo = new ViewObject();
+                vo.set("conversation", msg);
+                int targetId = msg.getFromId() == userId ? msg.getToId() : msg.getFromId();
+                User user = userService.getUser(targetId);
+                //System.out.println(msg.getCreatedDate());
+                vo.set("time",String.valueOf((date.getTime() - msg.getCreatedDate().getTime())/(60*1000)));
+                vo.set("user", user);
+                vo.set("unread", messageService.getConversationUnReadCount(userId, msg.getConversationId()));
+                conversations.add(vo);
+            }
+            model.addAttribute("conversations", conversations);
+            model.addAttribute("localUserId", userId);
+        } catch (Exception e) {
+            logger.error("获取站内信列表失败" + e.getMessage());
+        }
         return "pages/index";
     }
 
@@ -25,4 +71,6 @@ public class HomeController {
     public String login() {
         return "pages/login";
     }
+
 }
+

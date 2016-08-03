@@ -17,6 +17,23 @@ CREATE TABLE `login_ticket` (
   `ticket` VARCHAR(45) NOT NULL,
   `expired` DATETIME NOT NULL,
   `status` INT NULL DEFAULT 0,
+  `login` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `ticket_UNIQUE` (`ticket` ASC)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE `message` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `from_id` INT NULL,
+  `to_id` INT NULL,
+  `content` TEXT NULL,
+  `created_date` DATETIME NULL,
+  `has_read` INT NULL,
+  `conversation_id` VARCHAR(45) NOT NULL,
+  `deleted` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `conversation_index` (`conversation_id` ASC),
+  INDEX `created_date` (`created_date` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;

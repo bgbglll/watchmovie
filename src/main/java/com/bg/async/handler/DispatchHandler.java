@@ -7,7 +7,6 @@ import com.bg.model.Message;
 import com.bg.model.User;
 import com.bg.service.MessageService;
 import com.bg.service.UserService;
-import com.bg.util.StringToUrlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,7 @@ import java.util.List;
  * Created by Administrator on 2016/7/18.
  */
 @Component
-public class LikeHandler implements EventHandler {
+public class DispatchHandler implements EventHandler {
     @Autowired
     MessageService messageService;
 
@@ -30,17 +29,13 @@ public class LikeHandler implements EventHandler {
     public void doHandle(EventModel model) {
         //System.out.println("Liked");
         Message message = new Message();
-        //“1”：系统账号id
+        //“1”：system account id
         int fromId = 1;
         int toId = model.getEntityOwnerId();
         message.setFromId(fromId);
-        User user = userService.getUser(model.getActorId());
         message.setToId(toId);
-        String newsUrl = "http://127.0.0.1:8080/news/" + model.getEntityId();
-        ///user/{userId}/
-        String userUrl = "http://127.0.0.1:8080/user/" + user.getId() + "/";
-        String userContent = "用户" + user.getName();
-        String content = StringToUrlUtil.buildUrl(userUrl,userContent) + "赞了您的资讯," + StringToUrlUtil.buildUrl(newsUrl,newsUrl);
+
+        String content = "Dispatch is over!";
         message.setContent(content);
         //message.setContent("<a href='" + userUrl + "'>" + "用户" + user.getName() + "</a>" + "攒了您的咨询," + "<a href='" + newsUrl + "'>" + newsUrl + "</a>");
         message.setCreatedDate(new Date());
@@ -51,6 +46,6 @@ public class LikeHandler implements EventHandler {
 
     @Override
     public List<EventType> getSupportEventTypes() {
-        return Arrays.asList(EventType.LIKE);
+        return Arrays.asList(EventType.DISPATCH);
     }
 }

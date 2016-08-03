@@ -10,6 +10,7 @@ public class LoginTicket {
     private int userId;
     private Date expired;
     private int status;// 0有效，1无效
+    private Date login;
     private String ticket;
 
     public String getTicket() {
@@ -50,5 +51,13 @@ public class LoginTicket {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public Date getLogin() {
+        return login;
+    }
+
+    public void setLogin(Date login) {
+        this.login = login;
     }
 }

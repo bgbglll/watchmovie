@@ -12,6 +12,7 @@ public class EventModel {
     private int entityType;
     private int entityId;
     private int entityOwnerId;
+    private String content;
     private Map<String, String> exts = new HashMap<>();
 
     public String getExt(String key) {
@@ -79,5 +80,14 @@ public class EventModel {
 
     public void setExts(Map<String, String> exts) {
         this.exts = exts;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public EventModel setDispatchContent(String content) {
+        this.content = content;
+        return this;
     }
 }

@@ -6,6 +6,8 @@ package com.bg.controller;
 
 import com.bg.model.HostHolder;
 import com.bg.model.Message;
+import com.bg.model.User;
+import com.bg.model.ViewObject;
 import com.bg.service.MessageService;
 import com.bg.service.UserService;
 import com.bg.util.WatchMovieUtil;
@@ -13,12 +15,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class MessageController {
@@ -53,4 +58,6 @@ public class MessageController {
             return WatchMovieUtil.getJSONString(1, "插入消息失败");
         }
     }
+
+   
 }

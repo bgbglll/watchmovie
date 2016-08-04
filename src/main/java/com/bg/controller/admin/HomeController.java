@@ -40,17 +40,32 @@ public class HomeController {
             int userId = hostHolder.getUser().getId();
             List<ViewObject> conversations = new ArrayList<>();
             List<Message> conversationList = messageService.getConversationList(userId, 0, 10);
+
             Date date = new Date();
             //System.out.println(date);
             for (Message msg : conversationList) {
                 //System.out.println(msg.getContent());
                 ViewObject vo = new ViewObject();
                 vo.set("conversation", msg);
-                int targetId = msg.getFromId() == userId ? msg.getToId() : msg.getFromId();
-                User user = userService.getUser(targetId);
+                List<Message> detailList = messageService.getConversationDetail(msg.getConversationId(),0,10);
+                List<ViewObject> messages = new ArrayList<>();
+                for (Message msgg : detailList){
+                    ViewObject vo2 = new ViewObject();
+                    //System.out.println(msg.getId());
+                    messageService.readMessage(msgg.getId());
+                    vo2.set("message",msgg);
+                    User user = userService.getUser(msgg.getFromId());
+                    if(user == null){
+                        continue;
+                    }
+                    vo2.set("headUrl",user.getHeadUrl());
+                    vo2.set("userId",user.getId());
+                    vo2.set("userName",user.getName());
+                    messages.add(vo2);
+                }
+                model.addAttribute("messages",messages);
                 //System.out.println(msg.getCreatedDate());
                 vo.set("time",String.valueOf((date.getTime() - msg.getCreatedDate().getTime())/(60*1000)));
-                vo.set("user", user);
                 vo.set("unread", messageService.getConversationUnReadCount(userId, msg.getConversationId()));
                 conversations.add(vo);
             }

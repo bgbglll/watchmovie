@@ -4,7 +4,39 @@
 <body>
 
     <div id="wrapper">
+        <div class="modal fade" id="modal-container-838899" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    #foreach($msg in $messages)
 
+                    <div class="col-lg-12">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                From: "$!{msg.userName}"
+                            </div>
+                            <div class="panel-body">
+                                <p>$!{msg.message.content}</p>
+                            </div>
+                            <div class="panel-footer">
+
+                                $!{foreach.count}/$!{messages.size()}
+                            </div>
+                        </div>
+                    </div>
+                    #end
+
+
+                    <!--<div class="modal-body" contenteditable="true">
+
+
+                    </div>
+                    -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- Navigation -->
         #parse("pages/navigation.html")
 
@@ -363,11 +395,13 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="list-group">
+                                <!--<a id="modal-838899" href="#modal-container-838899" role="button" class="btn" data-toggle="modal"> -->
                                 #foreach($conversation in $conversations)
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-warning fa-fw"></i> $!{conversation.conversation.id} System Notifications
+                                    <a id="modal-838899" href="#modal-container-838899" data-toggle="modal" class="list-group-item">
+                                    <i class="fa fa-warning fa-fw"></i>$!{conversation.conversation.id} System Notifications
                                     <span class="pull-right text-muted small"><em>$date.format('yyyy-MM-dd HH:mm:ss', $!{conversation.conversation.createdDate})</em>
                                     </span>
+                                    </a>
                                 </a>
                                 #end
                             </div>
@@ -533,6 +567,12 @@
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/sb-admin-2.js"></script>
 
+    <script>
+//        $("#modal-838899").click(function () {
+//            alert("in");
+//
+//        });
+    </script>
 </body>
 
 </html>

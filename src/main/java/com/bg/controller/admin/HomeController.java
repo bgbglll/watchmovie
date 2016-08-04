@@ -1,8 +1,10 @@
 package com.bg.controller.admin;
 
+import com.alibaba.fastjson.JSONObject;
 import com.bg.controller.MessageController;
 import com.bg.model.*;
 import com.bg.service.MessageService;
+import com.bg.service.ServerService;
 import com.bg.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,6 +35,9 @@ public class HomeController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ServerService serverService;
 
     private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -78,7 +85,9 @@ public class HomeController {
     }
 
     @RequestMapping(path = {"/admin/dispatch"}, method = {RequestMethod.GET, RequestMethod.POST})
-    public String upload() {
+    public String upload(Model model) {
+        List<Server> servers = serverService.getServerList(0, 10);
+        model.addAttribute("servers",servers);
         return "pages/dispatch";
     }
 

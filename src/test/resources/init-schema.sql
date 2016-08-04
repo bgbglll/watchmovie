@@ -37,3 +37,13 @@ CREATE TABLE `message` (
   INDEX `created_date` (`created_date` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+DROP TABLE IF EXISTS `server`;
+CREATE TABLE `server` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(256) NOT NULL,
+  `ip` VARCHAR(45) NOT NULL,
+  `port` VARCHAR(45) NOT NULL,
+  `status` VARCHAR(45) NULL DEFAULT 'Normal',
+  PRIMARY KEY (`id`)
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

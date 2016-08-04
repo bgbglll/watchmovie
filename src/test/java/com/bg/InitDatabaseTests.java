@@ -1,6 +1,8 @@
 package com.bg;
 
+import com.bg.dao.ServerDAO;
 import com.bg.dao.UserDAO;
+import com.bg.model.Server;
 import com.bg.model.User;
 import com.bg.util.WatchMovieUtil;
 import org.junit.Test;
@@ -25,6 +27,10 @@ public class InitDatabaseTests {
     @Autowired
     UserDAO userDAO;
 
+    @Autowired
+    ServerDAO serverDAO;
+
+
     @Test
     public void initData() {
         Random random = new Random();
@@ -42,5 +48,15 @@ public class InitDatabaseTests {
         admin.setSalt("");
         admin.setType("admin");
         userDAO.addUser(admin);
+
+        for(int i=0;i<2;i++){
+            Server server = new Server();
+            server.setIp("127.0.0.1");
+            server.setName("Server" + String.valueOf(i+1));
+            server.setPort(String.valueOf(10012 + i));
+            serverDAO.addServer(server);
+        }
+
+
     }
 }

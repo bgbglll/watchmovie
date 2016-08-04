@@ -115,7 +115,16 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="success" id="10012">
+                                #foreach($server in $servers)
+                                <tr class="success" id="$!{server.port}">
+                                    <td>$!{server.id}</td>
+                                    <td class="name">$!{server.name} </td>
+                                    <td class="ip">$!{server.ip} </td>
+                                    <td class="port">$!{server.port} </td>
+                                    <td class="status">Normal </td>
+                                </tr>
+                                #end
+                                <!--<tr class="success" id="10012">
                                     <td>1</td>
                                     <td class="name">Server1 </td>
                                     <td class="ip">127.0.0.1 </td>
@@ -135,7 +144,7 @@
                                     <td class="ip">127.0.0.1 </td>
                                     <td class="port">10014 </td>
                                     <td class="status">Normal </td>
-                                </tr>
+                                </tr>-->
                                 </tbody>
                             </table>
                         </div>

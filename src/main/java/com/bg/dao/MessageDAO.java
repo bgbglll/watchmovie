@@ -2,12 +2,14 @@ package com.bg.dao;
 
 import com.bg.model.Message;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/7/11.
  */
+@Repository
 @Mapper
 public interface MessageDAO {
     String TABLE_NAME = " message ";

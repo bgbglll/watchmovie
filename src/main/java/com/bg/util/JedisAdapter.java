@@ -7,6 +7,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 import java.util.List;
 
@@ -27,7 +28,13 @@ public class JedisAdapter implements InitializingBean  {
     private JedisPool pool = null;
 
     public JedisAdapter() {
-        pool = new JedisPool("localhost", 6379);
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxTotal(100);
+
+        config.setMaxIdle(20);
+
+        config.setMaxWaitMillis(2000l);
+        pool = new JedisPool(config, "localhost", 6379);
     }
     @Override
     public void afterPropertiesSet() throws Exception {

@@ -24,7 +24,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -38,6 +40,8 @@ public class DispatchController {
 
     private final Executor exec = Executors.newCachedThreadPool();
 
+    private Map<String, String> md5ToFileName = new HashMap<>();
+
     @Autowired
     JedisAdapter jedisAdapter;
 
@@ -46,11 +50,12 @@ public class DispatchController {
 
     @Autowired
     HostHolder hostHolder;
+
     @RequestMapping(path = {"/transferFile/"}, method = {RequestMethod.POST})
     @ResponseBody
     public String transferFile(@RequestParam("qqfile") List<MultipartFile> fileTmp
-            ,@RequestParam("ip") String ipList
-            ,@RequestParam("port") String portList) {
+            , @RequestParam("ip") String ipList
+            , @RequestParam("port") String portList) {
         try {
             String[] ip = ipList.split(" ");
             String[] port = portList.split(" ");
@@ -80,19 +85,23 @@ public class DispatchController {
                 echo.setFile_md5(m);
                 md5.add(m);
                 echo.setFile_name(fileName);
+                md5ToFileName.put(m, fileName);
+
                 echo.setFile_type(FileTransferClient.getSuffix(fileName));
                 echo.setStarPos(0);// 文件开始位置
                 //System.out.println(echo);
 
 
                 for (int i = 0; i < len; i++) {
-                    int p =Integer.parseInt(port[i]);
+                    int p = Integer.parseInt(port[i]);
                     String _ip = ip[i];
                     Runnable task = new Runnable() {
                         @Override
                         public void run() {
                             try {
+
                                 new FileTransferClient().connect(p, _ip, echo);
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -104,9 +113,9 @@ public class DispatchController {
 
             JSONObject json = new JSONObject();
             json.put("success", "ok");
-            json.put("md5",md5);
+            json.put("md5", md5);
             //json.put("number",String.valueOf(len));
-            json.put("fileName",fName);
+            json.put("fileName", fName);
             //System.out.println(json.toJSONString());
             return json.toJSONString();
         } catch (Exception e) {
@@ -121,42 +130,41 @@ public class DispatchController {
     @ResponseBody
     public String getProgress() {
         JSONObject json = new JSONObject();
-        List<String> response = jedisAdapter.brpop(2,"response");
 
-        if (response == null || response.isEmpty()) {
-            System.out.println("done");
+        String response = jedisAdapter.rpop("response");
+
+        if (response == null) {
+
+            return null;
+        }
+        //System.out.println(response);
+
+        ResponseFile resfile = JSON.parseObject(response, ResponseFile.class);
+
+        //asyn
+        if (resfile.getProgress() == 100) {
             json.put("done", "1");
-            json.put("progress", "100");
-            json.put("id","0");
-            json.put("server","0");
+            System.out.println("done");
             eventProducer.fireEvent(new EventModel(EventType.DISPATCH)
                     .setEntityOwnerId(hostHolder.getUser().getId())
                     // system id;
                     .setActorId(1)
                     .setEntityId(0)
-                    .setEntityType(EntityType.ENTITY_DISPATCH));
-
-            return json.toJSONString();
+                    .setEntityType(EntityType.ENTITY_DISPATCH)
+                    .setContent("In " + resfile.getServerName() + ", File: " + md5ToFileName.get(resfile.getFile_md5())));
         }
-        //System.out.println(response);
-        for(String res : response) {
-            if (res.equals("response")) {
-                continue;
-            }
-            ResponseFile resfile = JSON.parseObject(res, ResponseFile.class);
-            json.put("done", "0");
-            json.put("progress", String.valueOf((resfile.getProgress())));
-            json.put("id", resfile.getFile_md5());
-            //System.out.println(resfile.getServerName());
-            json.put("server", resfile.getServerName());
-        }
+        else json.put("done","0");
+
+        json.put("progress", String.valueOf((resfile.getProgress())));
+        json.put("id", resfile.getFile_md5());
+        //System.out.println(resfile.getServerName());
+        json.put("server", resfile.getServerName());
 
 
-        //System.out.println("in");
-
+    //System.out.println("in");
 
 
         return json.toJSONString();
-    }
+}
 
 }

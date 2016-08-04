@@ -19,7 +19,7 @@
                             </div>
                             <div class="panel-footer">
 
-                                $!{foreach.count}/$!{messages.size()}
+                                $!{foreach.count}/$!{messages.size()}  $date.format('yyyy-MM-dd HH:mm:ss', $!{msg.message.createdDate})
                             </div>
                         </div>
                     </div>

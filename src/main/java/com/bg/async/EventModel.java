@@ -86,7 +86,7 @@ public class EventModel {
         return content;
     }
 
-    public EventModel setDispatchContent(String content) {
+    public EventModel setContent(String content) {
         this.content = content;
         return this;
     }

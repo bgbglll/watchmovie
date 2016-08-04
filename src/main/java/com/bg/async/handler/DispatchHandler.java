@@ -34,8 +34,7 @@ public class DispatchHandler implements EventHandler {
         int toId = model.getEntityOwnerId();
         message.setFromId(fromId);
         message.setToId(toId);
-
-        String content = "Dispatch is over!";
+        String content = model.getContent() + ", Dispatch is over!";
         message.setContent(content);
         //message.setContent("<a href='" + userUrl + "'>" + "用户" + user.getName() + "</a>" + "攒了您的咨询," + "<a href='" + newsUrl + "'>" + newsUrl + "</a>");
         message.setCreatedDate(new Date());

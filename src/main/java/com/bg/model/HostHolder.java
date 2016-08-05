@@ -3,7 +3,7 @@ package com.bg.model;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by Administrator on 2016/7/6.
+ * Created by Administrator on 2016/8/3.
  */
 @Component
 public class HostHolder {

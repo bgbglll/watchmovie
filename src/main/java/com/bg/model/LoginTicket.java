@@ -3,7 +3,7 @@ package com.bg.model;
 import java.util.Date;
 
 /**
- * Created by Administrator on 2016/7/6.
+ * Created by Administrator on 2016/8/3.
  */
 public class LoginTicket {
     private int id;

@@ -3,7 +3,7 @@ package com.bg.async;
 import javax.xml.ws.Dispatch;
 
 /**
- * Created by Administrator on 2016/7/18.
+ * Created by Administrator on 2016/8/3.
  */
 public enum EventType {
     LIKE(0),

@@ -5,7 +5,7 @@ import com.bg.model.fileclient.*;
 
 
 /**
- * 传输数据转化包
+ * Convert model
  * @author Administrator
  *
  */

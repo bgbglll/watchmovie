@@ -3,7 +3,7 @@ package com.bg.model;
 import java.util.Date;
 
 /**
- * Created by Administrator on 2016/7/11.
+ * Created by Administrator on 2016/8/3.
  */
 public class Message {
     private int id;

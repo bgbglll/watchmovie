@@ -8,7 +8,7 @@ import java.security.MessageDigest;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2016/8/1.
+ * Created by Administrator on 2016/8/3.
  */
 public class WatchMovieUtil {
     private static final Logger logger = LoggerFactory.getLogger(WatchMovieUtil.class);

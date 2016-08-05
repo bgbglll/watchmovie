@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * Created by Administrator on 2016/7/6.
+ * Created by Administrator on 2016/8/3.
  */
 @Component
 public class WatchMovieWebConfiguration extends WebMvcConfigurerAdapter{

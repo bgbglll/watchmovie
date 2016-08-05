@@ -12,13 +12,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * 计算文件的 MD5值，大文件不适合，会出现异常 
- * 大文件是指超过 1GB
+ *
+ *
  * 
- * MD5生成效率：
- * 300MB 大约需要 1秒钟时间
- * 
- * @author 洋白菜
+ * @author bg
  *
  */
 public class MD5FileUtil {

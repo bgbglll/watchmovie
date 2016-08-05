@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2016/8/1.
+ * Created by Administrator on 2016/8/2.
  */
 @Controller("adminLoginController")
 public class LoginController {

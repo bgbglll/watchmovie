@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/7/6.
+ * Created by Administrator on 2016/8/3.
  */
 @Mapper
 public interface LoginTicketDAO {

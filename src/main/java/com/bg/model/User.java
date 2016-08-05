@@ -1,7 +1,7 @@
 package com.bg.model;
 
 /**
- * Created by Administrator on 2016/8/1.
+ * Created by Administrator on 2016/8/3.
  */
 public class User {
     private int id;

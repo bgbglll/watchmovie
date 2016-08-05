@@ -1,7 +1,7 @@
 package com.bg.util;
 
 /**
- * Created by Administrator on 2016/7/16.
+ * Created by Administrator on 2016/8/3.
  */
 public class RedisKeyUtil {
     private static String SPLIT = ":";

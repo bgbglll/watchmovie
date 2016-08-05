@@ -1,7 +1,7 @@
 package com.bg.model;
 
 /**
- * Created by Administrator on 2016/7/11.
+ * Created by Administrator on 2016/8/3.
  */
 public class EntityType {
     public static int ENTITY_NEWS = 1;

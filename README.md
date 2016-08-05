@@ -8,7 +8,7 @@ WatchMovie is gathering place of who truely love movie.
 
 
 
-## So what can I do with WatchMoive?
+## So what can I do with WatchMovie?
 <br/>
 To Manager:
 
@@ -36,7 +36,7 @@ To Customer:
 #####Setting-up
 The datasource is used MySQL 5.7. 
 
-So at first you need set the databaes config file in %PROJECT_ROOT%/src/main/resources/application.properties, the exmaple:
+So at first you need set the database config file in %PROJECT_ROOT%/src/main/resources/application.properties, the exmaple:
 
 ```xml
 spring.datasource.url=jdbc:mysql://localhost:3306/watchmovie
@@ -57,11 +57,11 @@ Just run the InitDatabaseTests or deploy it in your server (e.g. tomcat) directo
 There will be a ticket for who sigh up account, so no ticket no sign in.
 
 #####2.Dispatch
-Firstly, add the target server adress.
+Firstly, add the target server address.
 
 Then, select the files and drop them in upload box.
 
-Finnally, push the button. When the dispatch is over, you will get notification.
+Finally, push the button. When the dispatch is over, you will get notification.
 ####Note: run dispatch function needs to start receiver server which in netty-file-server project at first.
 #####3.Screen & Arrange
 Firstly, create playlist including movie, number of movie room, play date and play daily or weekly according to sales manager.

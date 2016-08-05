@@ -17,7 +17,7 @@ To Manager:
 - Dispatch the movie files.
 - Marketing Analyze.
 - Box Office Analyze.
-- Managing ticcket.
+- Managing ticket.
 - Screen & Arrange.
 
 <br/>

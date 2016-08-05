@@ -146,7 +146,42 @@
                                     <td class="status">Normal </td>
                                 </tr>-->
                                 </tbody>
+                                <div class="col-lg-1  pull-right">
+                                    <a id="modal-732656" href="#modal-container-732656" role="button" class="btn btn-outline btn-primary btn-lg" data-toggle="modal">+</a>
+                                </div>
                             </table>
+                            <div class="modal fade" id="modal-container-732656" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <form method="post" action="/admin/addServer">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                            </button>
+                                            <div class="input-group input-group-lg">
+                                                <span class="input-group-addon ">ServerName</span>
+                                                <input type="text" class="form-control" placeholder="ServerXX"
+                                                       aria-describedby="basic-addon1" name="serverName"
+                                                       id="serverName">
+                                            </div>
+                                            <div class="input-group input-group-lg">
+                                                <span class="input-group-addon">IP</span>
+                                                <input type="text" class="form-control" placeholder="127.0.0.1"
+                                                       aria-describedby="basic-addon1" name="ip" id="ip">
+                                            </div>
+                                            <div class="input-group input-group-lg">
+                                                <span class="input-group-addon">PORT</span>
+                                                <input type="text" class="form-control" placeholder="10013"
+                                                       aria-describedby="basic-addon1" name="port" id="port">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <input type="submit" name="commit" value="Add" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
                         </div>
                         <div class="panel panel-warning">
                         <div class="panel-heading">

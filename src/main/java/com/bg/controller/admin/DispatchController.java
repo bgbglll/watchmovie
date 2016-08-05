@@ -7,8 +7,10 @@ import com.bg.async.EventProducer;
 import com.bg.async.EventType;
 import com.bg.model.EntityType;
 import com.bg.model.HostHolder;
+import com.bg.model.Server;
 import com.bg.model.fileclient.RequestFile;
 import com.bg.model.fileclient.ResponseFile;
+import com.bg.service.ServerService;
 import com.bg.service.fileclient.FileTransferClient;
 import com.bg.util.JedisAdapter;
 import com.bg.util.MD5FileUtil;
@@ -50,6 +52,9 @@ public class DispatchController {
 
     @Autowired
     HostHolder hostHolder;
+
+    @Autowired
+    ServerService serverService;
 
     @RequestMapping(path = {"/transferFile/"}, method = {RequestMethod.POST})
     @ResponseBody
@@ -152,8 +157,7 @@ public class DispatchController {
                     .setEntityId(0)
                     .setEntityType(EntityType.ENTITY_DISPATCH)
                     .setContent("In " + resfile.getServerName() + ", File: " + md5ToFileName.get(resfile.getFile_md5())));
-        }
-        else json.put("done","0");
+        } else json.put("done", "0");
 
         json.put("progress", String.valueOf((resfile.getProgress())));
         json.put("id", resfile.getFile_md5());
@@ -161,10 +165,29 @@ public class DispatchController {
         json.put("server", resfile.getServerName());
 
 
-    //System.out.println("in");
+        //System.out.println("in");
 
 
         return json.toJSONString();
-}
+    }
+
+    @RequestMapping(path = {"/admin/addServer"}, method = {RequestMethod.POST,RequestMethod.GET})
+    public String addServer(@RequestParam("serverName") String serverName
+            , @RequestParam("ip") String ip
+            , @RequestParam("port") String port) {
+        JSONObject json = new JSONObject();
+        try {
+            Server server = new Server();
+            server.setIp(ip);
+            server.setName(serverName);
+            server.setPort(port);
+            server.setStatus("Normal");
+            serverService.addServer(server);
+            return "redirect:/admin/dispatch";
+        } catch (Exception e) {
+            logger.error("添加服务器出错" + e.getMessage());
+        }
+        return "error";
+    }
 
 }

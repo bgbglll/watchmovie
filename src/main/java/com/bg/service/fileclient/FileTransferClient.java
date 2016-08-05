@@ -21,7 +21,7 @@ public class FileTransferClient {
 					ch.pipeline().addLast(new ObjectEncoder());
 					ch.pipeline().addLast(new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.weakCachingConcurrentResolver(this.getClass().getClassLoader()))); // 最大长度
 
-					ch.pipeline().addLast(new NettyMessageDecoder());//设置服务器端的编码和解码
+					ch.pipeline().addLast(new NettyMessageDecoder());
 					ch.pipeline().addLast(new NettyMessageEncoder());
 					ch.pipeline().addLast(new FileTransferClientHandler(echoFile));
 				}

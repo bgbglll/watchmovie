@@ -39,19 +39,19 @@ public class UserService {
     public Map<String, Object> register(String username, String password, String type){
         Map<String, Object> map = new HashMap<>();
         if(StringUtils.isBlank(username)){
-            map.put("msgname", "用户名不能为空");
+            map.put("msgname", "username is empty");
             return map;
         }
 
         if(StringUtils.isBlank(password)){
-            map.put("msgpwd", "密码不能为空");
+            map.put("msgpwd", "password is empty");
             return map;
         }
 
         User user = userDAO.selectByName(username);
 
         if(user != null){
-            map.put("msgname", "用户名已经被注册");
+            map.put("msgname", "username is registered");
             return map;
         }
 
@@ -76,26 +76,26 @@ public class UserService {
     public Map<String, Object> login(String username, String password){
         Map<String, Object> map = new HashMap<>();
         if(StringUtils.isBlank(username)){
-            map.put("msgname", "用户名不能为空");
+            map.put("msgname", "username is empty");
             return map;
         }
 
         if(StringUtils.isBlank(password)){
-            map.put("msgpwd", "密码不能为空");
+            map.put("msgpwd", "password is empty");
             return map;
         }
 
         User user = userDAO.selectByName(username);
 
         if(user == null){
-            map.put("msgname", "用户名不存在");
+            map.put("msgname", "username does not exist");
             return map;
         }
         //System.out.println(password);
         //System.out.println(user.getSalt());
         //System.out.println(ToutiaoUtil.MD5(password + user.getSalt()));
         if(!WatchMovieUtil.MD5(password + user.getSalt()).equals(user.getPassword())){
-            map.put("msgpwd", "密码不正确");
+            map.put("msgpwd", "password is wrong");
             return map;
         }
 

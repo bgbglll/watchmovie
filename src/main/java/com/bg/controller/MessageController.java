@@ -54,8 +54,8 @@ public class MessageController {
             messageService.addMessage(msg);
             return WatchMovieUtil.getJSONString(msg.getId());
         } catch (Exception e) {
-            logger.error("增加消息失败" + e.getMessage());
-            return WatchMovieUtil.getJSONString(1, "插入消息失败");
+            logger.error("add message failed" + e.getMessage());
+            return WatchMovieUtil.getJSONString(1, "add message failed");
         }
     }
 

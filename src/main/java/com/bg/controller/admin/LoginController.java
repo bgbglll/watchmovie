@@ -42,10 +42,10 @@ public class LoginController {
                 }
                 response.addCookie(cookie);
             }
-            return WatchMovieUtil.getJSONString(0,"注册成功");
+            return WatchMovieUtil.getJSONString(0,"sign up success");
         }catch (Exception e){
-            logger.error("注册异常" + e.getMessage());
-            return WatchMovieUtil.getJSONString(1,"注册异常");
+            logger.error("sign up error" + e.getMessage());
+            return WatchMovieUtil.getJSONString(1,"sign up error");
         }
     }
     @RequestMapping(path = {"/admin/login"}, method = {RequestMethod.GET, RequestMethod.POST})
@@ -65,10 +65,10 @@ public class LoginController {
                 }
                 response.addCookie(cookie);
             }
-            return WatchMovieUtil.getJSONString(0,"登陆成功");
+            return WatchMovieUtil.getJSONString(0,"sign in success");
         }catch (Exception e){
-            logger.error("登陆异常" + e.getMessage());
-            return WatchMovieUtil.getJSONString(1,"登陆异常");
+            logger.error("sign in failed" + e.getMessage());
+            return WatchMovieUtil.getJSONString(1,"sign in failed");
         }
     }
 

@@ -36,7 +36,7 @@ public class InitDatabaseTests {
         Random random = new Random();
         User system = new User();
         system.setHeadUrl(String.format("http://images.nowcoder.com/head/%dt.png", random.nextInt(1000)));
-        system.setName("I am system");
+        system.setName("I am SYSTEM");
         system.setPassword(WatchMovieUtil.MD5("I am system"));
         system.setSalt("");
         system.setType("system");

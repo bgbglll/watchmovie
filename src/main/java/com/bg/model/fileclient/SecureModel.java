@@ -9,7 +9,7 @@ public class SecureModel  implements Serializable{
 	 */
 	private static final long serialVersionUID = -2108336644101910071L;
 	/**
-	 * 验证 token 
+	 * validate token
 	 */
 	private String token ;
 	

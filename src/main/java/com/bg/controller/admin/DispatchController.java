@@ -84,7 +84,7 @@ public class DispatchController {
                     fTmp.transferTo(file);
 
 
-                String fileName = file.getName();// 文件名
+                String fileName = file.getName();// FileName
                 echo.setFile(file);
                 String m = MD5FileUtil.getFileMD5String(file);
                 echo.setFile_md5(m);
@@ -93,7 +93,7 @@ public class DispatchController {
                 md5ToFileName.put(m, fileName);
 
                 echo.setFile_type(FileTransferClient.getSuffix(fileName));
-                echo.setStarPos(0);// 文件开始位置
+                echo.setStarPos(0);// file start position
                 //System.out.println(echo);
 
 
@@ -185,7 +185,7 @@ public class DispatchController {
             serverService.addServer(server);
             return "redirect:/admin/dispatch";
         } catch (Exception e) {
-            logger.error("添加服务器出错" + e.getMessage());
+            logger.error("add server error" + e.getMessage());
         }
         return "error";
     }

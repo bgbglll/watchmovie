@@ -8,8 +8,8 @@ import io.netty.handler.codec.MessageToMessageEncoder;
 import java.util.List;
 
 /**
- * 编码器
- * @author 洋白菜
+ * Encoder
+ * @author bg
  *
  */
 public class NettyMessageEncoder extends MessageToMessageEncoder<Object> {

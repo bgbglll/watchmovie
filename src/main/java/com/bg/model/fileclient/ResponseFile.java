@@ -17,23 +17,23 @@ public class ResponseFile implements Serializable {
 
 	private String serverName;
 	/**
-	 * 开始 读取点
+	 * start point
 	 */
 	private long start;
 	/**
-	 * 文件的 MD5值
+	 * file md5
 	 */
 	private String file_md5;
 	/**
-	 * 文件下载地址
+	 * download url
 	 */
 	private String file_url;
 	/**
-	 * 上传是否结束
+	 * is end?
 	 */
 	private boolean end;
 	/**
-	 * 进度
+	 * progress
 	 */
 	private int progress ;
 

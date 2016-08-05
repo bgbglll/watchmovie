@@ -68,7 +68,7 @@ public class FileTransferClientHandler extends ChannelInboundHandlerAdapter {
 						request.setFile_size(randomAccessFile.length());
 						ctx.writeAndFlush(request);
 					} else {
-						System.out.println("文件已经读完");
+						System.out.println("over");
 					}
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();

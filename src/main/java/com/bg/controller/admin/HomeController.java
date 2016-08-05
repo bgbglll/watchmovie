@@ -79,7 +79,7 @@ public class HomeController {
             model.addAttribute("conversations", conversations);
             model.addAttribute("localUserId", userId);
         } catch (Exception e) {
-            logger.error("获取站内信列表失败" + e.getMessage());
+            logger.error("Read message list failed" + e.getMessage());
         }
         return "pages/index";
     }

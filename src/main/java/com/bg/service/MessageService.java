@@ -25,7 +25,7 @@ public class MessageService {
     }
 
     public List<Message> getConversationList(int userId, int offset, int limit) {
-        // conversation的总条数存在id里
+        // the total size conversation in 'id'
         return messageDAO.getConversationList(userId, offset, limit);
     }
 

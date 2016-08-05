@@ -23,8 +23,8 @@ import io.netty.handler.codec.MessageToMessageDecoder;
 import java.util.List;
 
 /**
- * 解码器
- * @author 洋白菜
+ * Decoder
+ * @author bg
  *
  */
 public class NettyMessageDecoder extends MessageToMessageDecoder<Object> {
